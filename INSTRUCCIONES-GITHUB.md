@@ -5,7 +5,8 @@
 Abre esta carpeta en VS Code:
 
 ```text
-portafolio-web-david
+Portafolio-UX-UI
+
 ```
 
 Luego crea un repositorio en GitHub y conecta el remoto:
