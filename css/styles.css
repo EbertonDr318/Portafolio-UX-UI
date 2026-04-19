@@ -673,37 +673,34 @@ h1 {
   padding-top: 72px;
 }
 
-.imagen-caso figcaption {
-  color: var(--coral);
-  font-size: 0.78rem;
-  font-weight: 900;
-  text-transform: uppercase;
-}
-
 .caso-estudio {
+  --margen-caso: clamp(18px, 5vw, 72px);
+  --ancho-caso: min(980px, calc(100vw - (var(--margen-caso) * 2)));
   display: grid;
-  gap: 1px;
-  padding: clamp(18px, 5vw, 72px);
-  background: var(--ink);
-}
-
-.caso-estudio {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(0, var(--ancho-caso));
+  justify-content: center;
+  gap: 0;
+  padding: 0 var(--margen-caso) clamp(28px, 6vw, 96px);
+  background: var(--paper);
 }
 
 .bloque-caso {
-  min-height: 360px;
-  padding: clamp(24px, 4vw, 42px);
-  background: var(--white);
+  min-height: auto;
+  padding: clamp(30px, 6vw, 72px) 0;
+  border-top: 1px solid var(--ink);
+  background: transparent;
 }
 
 .nombre-caso {
-  grid-column: span 2;
-  min-height: 520px;
+  width: 100vw;
+  min-height: 72vh;
   display: grid;
   align-content: end;
+  padding: clamp(120px, 14vw, 190px) calc((100vw - var(--ancho-caso)) / 2) clamp(42px, 8vw, 96px);
+  border-top: 0;
   background: var(--ink);
   color: var(--white);
+  margin-left: calc((100vw - var(--ancho-caso)) / -2);
 }
 
 .nombre-caso h1 {
@@ -720,23 +717,18 @@ h1 {
 }
 
 .imagen-caso {
-  grid-column: span 1;
-  min-height: 520px;
+  min-height: 76vh;
   margin: 0;
+  padding: clamp(30px, 6vw, 72px) 0;
   overflow: hidden;
-  background: var(--white);
+  border-top: 1px solid var(--ink);
+  border-radius: 0;
+  background: transparent;
 }
 
 .imagen-caso img {
-  height: calc(100% - 48px);
-}
-
-.imagen-caso figcaption {
-  display: grid;
-  align-items: center;
-  min-height: 48px;
-  padding: 0 18px;
-  border-top: 1px solid var(--ink);
+  height: 100%;
+  border-radius: 8px;
 }
 
 .bloque-caso h2 {

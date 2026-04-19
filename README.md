@@ -1,46 +1,39 @@
 # Portafolio Web David
 
-Sitio web estático para el portafolio de David Perez.
+Sitio web estático listo para publicarse con GitHub Pages.
 
 ## Estructura
 
 ```text
-portafolio-web-david/
-├── index.html
-├── proyecto-appsheet.html
-├── proyecto-react-native.html
-├── proyecto-grow-lead.html
-├── css/
-│   └── styles.css
-├── js/
-│   └── script.js
-└── assets/
-    └── imagenes/
+index.html
+proyecto-appsheet.html
+proyecto-react-native.html
+proyecto-grow-lead.html
+css/styles.css
+js/script.js
+assets/imagenes/
 ```
 
-## Cómo abrirlo
+GitHub Pages sí acepta carpetas como `css`, `js` y `assets`. Lo importante es que `index.html` esté en la raíz del repositorio.
 
-Opción rápida:
+## Editar en VS Code
 
-1. Abre la carpeta `portafolio-web-david` en Visual Studio Code.
-2. Abre `index.html`.
-3. Usa la opción de tu navegador para abrir el archivo.
+1. Abre esta carpeta completa en Visual Studio Code.
+2. Edita los archivos HTML, CSS o JS.
+3. Guarda cambios.
+4. Haz commit y push.
 
-Opción recomendada:
+## Publicar en GitHub Pages
 
-1. Instala la extensión **Live Server** en Visual Studio Code.
-2. Haz clic derecho sobre `index.html`.
-3. Selecciona **Open with Live Server**.
+En GitHub:
 
-## Archivos principales
+1. Entra al repositorio.
+2. Ve a **Settings**.
+3. Entra a **Pages**.
+4. Selecciona **Deploy from a branch**.
+5. Branch: **main**.
+6. Folder: **/root**.
+7. Guarda.
 
-- `index.html`: página principal del portafolio.
-- `proyecto-appsheet.html`: caso de estudio del proyecto AppSheet.
-- `proyecto-react-native.html`: caso de estudio del proyecto React Native.
-- `proyecto-grow-lead.html`: caso de estudio del proyecto Grow & Lead.
-- `css/styles.css`: estilos, colores, layout, responsive y animaciones.
-- `js/script.js`: cabecera dinámica, animaciones al hacer scroll, cinta y ruleta de proyectos.
+Cada vez que hagas `git push`, GitHub Pages actualizará la web automáticamente.
 
-## Nota
-
-El sitio no necesita instalación de dependencias. Es HTML, CSS y JavaScript puro.
