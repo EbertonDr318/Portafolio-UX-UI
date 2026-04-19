@@ -5,7 +5,7 @@
 Abre esta carpeta en VS Code:
 
 ```text
-Portafolio-UX-UI
+Portafolio-UX-U
 
 ```
 
