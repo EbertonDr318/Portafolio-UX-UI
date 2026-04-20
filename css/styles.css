@@ -528,19 +528,19 @@ h1 {
 
 /* Ajuste AppSheet: logo casi cuadrado, por eso necesita menor ancho. */
 .tarjeta-appsheet img {
-  width: 48% !important;
+  width: 54% !important;
   max-width: 180px;
 }
 
 /* Ajuste Ingetelca: logo horizontal con muchos detalles, necesita más ancho. */
 .tarjeta-inge img {
-  width: 74% !important;
+  width: 84% !important;
   max-width: 315px;
 }
 
 /* Ajuste Grow & Lead: logo ancho, pero se mantiene compacto para que no sature. */
 .tarjeta-grow img {
-  width: 60% !important;
+  width: 70% !important;
   max-width: 245px;
 }
 
