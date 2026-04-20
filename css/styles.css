@@ -466,7 +466,7 @@ h1 {
   box-shadow: var(--shadow);
   transform: translate(-50%, -50%) scale(0.78);
   opacity: 0.42;
-  pointer-events: none;
+  pointer-events: auto;
   transition: transform 420ms ease, opacity 420ms ease, filter 420ms ease;
 }
 
@@ -594,7 +594,13 @@ h1 {
 }
 
 .tarjeta-ruleta:not(.esta-activa) {
+  cursor: pointer;
   filter: saturate(0.72) brightness(0.82);
+}
+
+/* Pista visual: las tarjetas laterales se iluminan un poco al pasar el mouse para indicar que se pueden seleccionar. */
+.tarjeta-ruleta:not(.esta-activa):hover {
+  opacity: 0.62;
 }
 
 .controles-ruleta {
@@ -755,10 +761,10 @@ h1 {
 
 .nombre-caso {
   width: 100vw;
-  min-height: 72vh;
+  min-height: auto;
   display: grid;
   align-content: end;
-  padding: clamp(120px, 14vw, 190px) calc((100vw - var(--ancho-caso)) / 2) clamp(42px, 8vw, 96px);
+  padding: clamp(96px, 11vw, 150px) calc((100vw - var(--ancho-caso)) / 2) clamp(48px, 7vw, 86px);
   border-top: 0;
   background: var(--ink);
   color: var(--white);

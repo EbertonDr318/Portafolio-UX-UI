@@ -67,6 +67,16 @@ if (ruleta) {
     punto.addEventListener("click", () => actualizarRuleta(Number(punto.dataset.puntoRuleta)));
   });
 
+  // Click en tarjetas: la activa abre el proyecto; las laterales solo pasan al centro.
+  tarjetas.forEach((tarjeta, indice) => {
+    tarjeta.addEventListener("click", (evento) => {
+      if (indice !== indiceActivo) {
+        evento.preventDefault();
+        actualizarRuleta(indice);
+      }
+    });
+  });
+
   // Flechas del teclado para cambiar de proyecto cuando la ruleta está en foco.
   ruleta.addEventListener("keydown", (evento) => {
     if (evento.key === "ArrowLeft") actualizarRuleta(indiceActivo - 1);
