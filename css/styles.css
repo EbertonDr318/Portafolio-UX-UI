@@ -484,21 +484,28 @@ h1 {
 
 .tarjeta-grow {
   background:
+    radial-gradient(circle at 50% 28%, rgba(255, 255, 255, 0.09), transparent 36%),
     linear-gradient(180deg, #171713 0%, var(--ink) 100%);
 }
 
 .tarjeta-grow img {
-  top: 39%;
+  top: 30%;
   left: 50%;
-  width: 84%;
-  height: auto;
-  max-height: 58%;
-  object-fit: contain;
+  width: 58% !important;
+  height: auto !important;
+  max-width: 270px;
+  max-height: 34%;
+  object-fit: contain !important;
+  object-position: center;
   transform: translate(-50%, -50%);
 }
 
 .tarjeta-grow::after {
-  background: linear-gradient(180deg, rgba(12, 13, 11, 0) 38%, rgba(12, 13, 11, 0.92) 82%);
+  background: linear-gradient(180deg, rgba(12, 13, 11, 0) 44%, rgba(12, 13, 11, 0.94) 82%);
+}
+
+.tarjeta-grow .etiqueta-ruleta {
+  margin-top: 170px;
 }
 
 .tarjeta-ruleta strong,
