@@ -482,30 +482,65 @@ h1 {
   inset: 0;
 }
 
-.tarjeta-grow {
+.tarjeta-logo {
   background:
-    linear-gradient(180deg, #171713 0%, var(--ink) 100%);
+    radial-gradient(circle at 50% 24%, rgba(255, 255, 255, 0.14), transparent 36%),
+    linear-gradient(180deg, #11120f 0%, var(--ink) 100%);
 }
 
-.tarjeta-grow img {
-  top: 39%;
+.tarjeta-logo::before {
+  content: "";
+  position: absolute;
+  inset: 24px 24px 142px;
+  z-index: 0;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(234, 247, 239, 0.82));
+}
+
+.tarjeta-logo img {
+  top: 35%;
   left: 50%;
-  width: 84%;
-  height: auto;
-  max-height: 58%;
-  object-fit: contain;
+  z-index: 1;
+  width: 54% !important;
+  height: auto !important;
+  max-width: 250px;
+  max-height: 32%;
+  object-fit: contain !important;
+  object-position: center;
   transform: translate(-50%, -50%);
 }
 
-.tarjeta-grow::after {
-  background: linear-gradient(180deg, rgba(12, 13, 11, 0) 38%, rgba(12, 13, 11, 0.92) 82%);
+.tarjeta-logo::after {
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(12, 13, 11, 0) 50%, rgba(12, 13, 11, 0.94) 82%);
+}
+
+.tarjeta-logo .etiqueta-ruleta {
+  margin-top: 185px;
+}
+
+.tarjeta-appsheet img {
+  width: 40% !important;
+  max-width: 180px;
+}
+
+.tarjeta-inge img {
+  width: 68% !important;
+  max-width: 315px;
+}
+
+.tarjeta-grow img {
+  width: 52% !important;
+  max-width: 245px;
 }
 
 .tarjeta-ruleta strong,
 .tarjeta-ruleta small,
 .etiqueta-ruleta {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .etiqueta-ruleta {
