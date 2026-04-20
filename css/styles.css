@@ -121,6 +121,7 @@ a {
 .medios-portada {
   position: absolute;
   inset: 0;
+  z-index: 0;
 }
 
 .imagen-portada {
@@ -131,19 +132,25 @@ a {
   box-shadow: 0 30px 90px rgba(0, 0, 0, 0.44);
 }
 
+/* Laptop principal: queda por encima de los otros cuadros para liderar la composición visual. */
 .imagen-a {
+  z-index: 2;
   right: 9%;
   top: 10%;
   transform: rotate(4deg);
 }
 
+/* Cuadro secundario: se mantiene por debajo de la laptop para dar profundidad. */
 .imagen-b {
+  z-index: 0;
   right: 34%;
   bottom: -13%;
   transform: rotate(-7deg);
 }
 
+/* Cuadro frontal oscuro: acompaña la composición, pero no debe tapar la laptop. */
 .imagen-c {
+  z-index: 1;
   right: -5%;
   bottom: -8%;
   transform: rotate(8deg);
