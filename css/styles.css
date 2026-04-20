@@ -482,6 +482,25 @@ h1 {
   inset: 0;
 }
 
+.tarjeta-grow {
+  background:
+    linear-gradient(180deg, #171713 0%, var(--ink) 100%);
+}
+
+.tarjeta-grow img {
+  top: 39%;
+  left: 50%;
+  width: 84%;
+  height: auto;
+  max-height: 58%;
+  object-fit: contain;
+  transform: translate(-50%, -50%);
+}
+
+.tarjeta-grow::after {
+  background: linear-gradient(180deg, rgba(12, 13, 11, 0) 38%, rgba(12, 13, 11, 0.92) 82%);
+}
+
 .tarjeta-ruleta strong,
 .tarjeta-ruleta small,
 .etiqueta-ruleta {
