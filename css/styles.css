@@ -85,6 +85,30 @@ a {
   font-weight: 600;
 }
 
+/* Enlace extra del menú móvil: replica la acción principal cuando la cabecera se simplifica. */
+.enlace-menu-movil {
+  display: none;
+}
+
+/* Botón hamburguesa: solo aparece en pantallas reducidas para abrir/cerrar la navegación. */
+.boton-menu {
+  display: none;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* Líneas del ícono: construyen el botón visual del menú hamburguesa. */
+.linea-menu {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
 .accion-cabecera {
   display: inline-grid;
   place-items: center;
@@ -449,6 +473,7 @@ h1 {
   align-items: center;
   margin-top: 28px;
   overflow: hidden;
+  touch-action: pan-y;
 }
 
 .escenario-ruleta {
@@ -841,10 +866,48 @@ h1 {
 /* Ajustes para tablets y pantallas medianas. */
 @media (max-width: 880px) {
   .cabecera-sitio {
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto;
+    align-items: center;
   }
 
+  /* Navegación móvil: se vuelve un panel desplegable debajo de la cabecera. */
   .navegacion {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 14px;
+    right: 14px;
+    display: none;
+    flex-direction: column;
+    gap: 14px;
+    padding: 18px;
+    border: 1px solid currentColor;
+    border-radius: 8px;
+    background: rgba(12, 13, 11, 0.96);
+    color: var(--white);
+    box-shadow: var(--shadow);
+  }
+
+  /* Estado abierto del menú móvil. */
+  .navegacion.esta-abierta {
+    display: flex;
+  }
+
+  /* Botón hamburguesa visible en móvil. */
+  .boton-menu {
+    display: inline-grid;
+    justify-self: end;
+  }
+
+  /* Acción secundaria dentro del menú móvil. */
+  .enlace-menu-movil {
+    display: inline-flex;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+    font-weight: 800;
+  }
+
+  /* Oculta el botón lateral grande en móvil para evitar duplicidad con el menú. */
+  .accion-cabecera {
     display: none;
   }
 

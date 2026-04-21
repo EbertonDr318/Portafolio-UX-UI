@@ -11,11 +11,19 @@
     <!-- Cabecera reutilizada: permite volver al inicio o a la sección de proyectos. -->
     <header class="cabecera-sitio esta-desplazada" data-cabecera>
       <a class="marca" href="index.html#inicio" aria-label="Ir al inicio"><span>DavidR</span></a>
-      <nav class="navegacion" aria-label="Navegación principal">
+      <!-- Botón de menú móvil: aparece cuando la navegación horizontal ya no cabe. -->
+      <button class="boton-menu" type="button" aria-label="Abrir menú" aria-expanded="false" data-boton-menu>
+        <span class="linea-menu"></span>
+        <span class="linea-menu"></span>
+        <span class="linea-menu"></span>
+      </button>
+      <!-- Navegación principal: en escritorio es horizontal y en móvil se convierte en panel desplegable. -->
+      <nav class="navegacion" aria-label="Navegación principal" data-menu>
         <a href="index.html#perfil">Perfil</a>
         <a href="index.html#experiencia">Experiencia</a>
         <a href="index.html#proyectos">Proyectos</a>
         <a href="index.html#contacto">Contacto</a>
+        <a class="enlace-menu-movil" href="index.html#proyectos">Volver</a>
       </nav>
       <a class="accion-cabecera" href="index.html#proyectos">Volver</a>
     </header>

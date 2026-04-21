@@ -1,5 +1,7 @@
 // Selecciona los elementos principales que JavaScript necesita controlar.
 const cabecera = document.querySelector("[data-cabecera]");
+const botonMenu = document.querySelector("[data-boton-menu]");
+const menuNavegacion = document.querySelector("[data-menu]");
 const elementosParaRevelar = document.querySelectorAll(".revelar");
 const pistaCinta = document.querySelector(".pista-cinta");
 const ruleta = document.querySelector("[data-ruleta]");
@@ -17,6 +19,32 @@ const actualizarEstadoCabecera = () => {
 
 actualizarEstadoCabecera();
 window.addEventListener("scroll", actualizarEstadoCabecera, { passive: true });
+
+// Menú móvil: abre y cierra la navegación cuando no cabe en formato horizontal.
+if (botonMenu && menuNavegacion) {
+  const alternarMenu = () => {
+    const estaAbierto = menuNavegacion.classList.toggle("esta-abierta");
+    botonMenu.setAttribute("aria-expanded", String(estaAbierto));
+  };
+
+  botonMenu.addEventListener("click", alternarMenu);
+
+  // Cierra el menú al tocar cualquier enlace interno.
+  menuNavegacion.querySelectorAll("a").forEach((enlace) => {
+    enlace.addEventListener("click", () => {
+      menuNavegacion.classList.remove("esta-abierta");
+      botonMenu.setAttribute("aria-expanded", "false");
+    });
+  });
+
+  // Si la pantalla vuelve a escritorio, limpia el estado abierto del menú.
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 880) {
+      menuNavegacion.classList.remove("esta-abierta");
+      botonMenu.setAttribute("aria-expanded", "false");
+    }
+  });
+}
 
 // Muestra los elementos con animación cuando entran en pantalla.
 const observador = new IntersectionObserver(
@@ -39,6 +67,8 @@ if (ruleta) {
   const puntos = [...ruleta.querySelectorAll("[data-punto-ruleta]")];
   const botonAnterior = ruleta.querySelector("[data-ruleta-anterior]");
   const botonSiguiente = ruleta.querySelector("[data-ruleta-siguiente]");
+  let inicioToqueX = 0;
+  let inicioToqueY = 0;
   let indiceActivo = 0;
 
   // Calcula qué tarjeta queda al centro y qué tarjetas quedan a los lados.
@@ -82,4 +112,32 @@ if (ruleta) {
     if (evento.key === "ArrowLeft") actualizarRuleta(indiceActivo - 1);
     if (evento.key === "ArrowRight") actualizarRuleta(indiceActivo + 1);
   });
+
+  // Deslizamiento táctil: en móvil permite cambiar de tarjeta moviendo el dedo de izquierda a derecha.
+  ruleta.addEventListener(
+    "touchstart",
+    (evento) => {
+      const toque = evento.touches[0];
+      inicioToqueX = toque.clientX;
+      inicioToqueY = toque.clientY;
+    },
+    { passive: true }
+  );
+
+  // Evalúa el gesto táctil y solo cambia de proyecto si el movimiento horizontal es claro.
+  ruleta.addEventListener(
+    "touchend",
+    (evento) => {
+      const toque = evento.changedTouches[0];
+      const distanciaX = toque.clientX - inicioToqueX;
+      const distanciaY = toque.clientY - inicioToqueY;
+      const umbralCambio = 45;
+
+      if (Math.abs(distanciaX) > Math.abs(distanciaY) && Math.abs(distanciaX) > umbralCambio) {
+        if (distanciaX < 0) actualizarRuleta(indiceActivo + 1);
+        if (distanciaX > 0) actualizarRuleta(indiceActivo - 1);
+      }
+    },
+    { passive: true }
+  );
 }

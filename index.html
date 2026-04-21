@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Portafolio web de David Perez, UX/UI y desarrollo web.">
-    <title>David Perez | UX/UI & Desarrollo Web</title>
+    <title>David Perez | Programador Jr / Diseñador UX/UI</title>
     <link rel="stylesheet" href="css/styles.css">
   </head>
   <body>
@@ -13,11 +13,19 @@
       <a class="marca" href="#inicio" aria-label="Ir al inicio">
         <span>DavidR</span>
       </a>
-      <nav class="navegacion" aria-label="Navegación principal">
+      <!-- Botón de menú móvil: aparece cuando la navegación horizontal ya no cabe. -->
+      <button class="boton-menu" type="button" aria-label="Abrir menú" aria-expanded="false" data-boton-menu>
+        <span class="linea-menu"></span>
+        <span class="linea-menu"></span>
+        <span class="linea-menu"></span>
+      </button>
+      <!-- Navegación principal: en escritorio es horizontal y en móvil se convierte en panel desplegable. -->
+      <nav class="navegacion" aria-label="Navegación principal" data-menu>
         <a href="#perfil">Perfil</a>
         <a href="#experiencia">Experiencia</a>
         <a href="#proyectos">Proyectos</a>
         <a href="#contacto">Contacto</a>
+        <a class="enlace-menu-movil" href="mailto:drjonathan318@gmail.com">Hablemos</a>
       </nav>
       <a class="accion-cabecera" href="mailto:drjonathan318@gmail.com">Hablemos</a>
     </header>
