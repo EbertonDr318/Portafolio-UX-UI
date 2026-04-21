@@ -831,6 +831,83 @@ h1 {
   border-radius: 8px;
 }
 
+/* Galería del proyecto: permite mostrar capturas una por una en lugar de una imagen compuesta. */
+.galeria-caso {
+  margin: 0;
+  padding: clamp(30px, 6vw, 72px) 0;
+  border-top: 1px solid var(--ink);
+}
+
+/* Marco de galería: contiene la captura activa y evita que se recorte en móvil. */
+.pista-galeria {
+  position: relative;
+  min-height: 76vh;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #eef1f2;
+}
+
+/* Slide de galería: todas las imágenes se apilan y solo una queda visible a la vez. */
+.slide-galeria {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  object-fit: contain;
+  transition: opacity 220ms ease;
+}
+
+/* Slide activo: muestra la captura actual dentro de la galería. */
+.slide-galeria.esta-visible {
+  opacity: 1;
+}
+
+/* Controles inferiores de la galería: botones laterales y puntos de posición. */
+.controles-galeria {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+/* Botones de galería: mantienen el mismo lenguaje visual simple del sitio. */
+.controles-galeria button,
+.puntos-galeria button {
+  border: 1px solid var(--ink);
+  background: var(--white);
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+}
+
+/* Botones lateral izquierdo y derecho de la galería. */
+.controles-galeria button {
+  min-height: 42px;
+  padding: 0 16px;
+  border-radius: 8px;
+  font-weight: 800;
+}
+
+/* Puntos de galería: muestran qué captura está activa. */
+.puntos-galeria {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Botones tipo punto de la galería. */
+.puntos-galeria button {
+  width: 34px;
+  height: 8px;
+  padding: 0;
+  border-radius: 999px;
+}
+
+/* Punto activo de la galería. */
+.puntos-galeria button.esta-activa {
+  background: var(--ink);
+}
+
 .bloque-caso h2 {
   margin-bottom: 18px;
   color: var(--coral);
@@ -866,8 +943,13 @@ h1 {
 /* Ajustes para tablets y pantallas medianas. */
 @media (max-width: 880px) {
   .cabecera-sitio {
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto 1fr auto;
     align-items: center;
+  }
+
+  /* Botón y marca juntos: el menú queda al lado izquierdo del nombre en móvil. */
+  .marca {
+    justify-self: start;
   }
 
   /* Navegación móvil: se vuelve un panel desplegable debajo de la cabecera. */
@@ -895,7 +977,8 @@ h1 {
   /* Botón hamburguesa visible en móvil. */
   .boton-menu {
     display: inline-grid;
-    justify-self: end;
+    justify-self: start;
+    margin-right: 10px;
   }
 
   /* Acción secundaria dentro del menú móvil. */
@@ -906,9 +989,13 @@ h1 {
     font-weight: 800;
   }
 
-  /* Oculta el botón lateral grande en móvil para evitar duplicidad con el menú. */
+  /* Mantiene visible la acción principal también en móvil. */
   .accion-cabecera {
-    display: none;
+    display: inline-grid;
+    justify-self: end;
+    min-height: 34px;
+    padding: 0 12px;
+    font-size: 0.86rem;
   }
 
   .portada {
@@ -943,8 +1030,14 @@ h1 {
   }
 
   .nombre-caso,
-  .imagen-caso {
+  .imagen-caso,
+  .galeria-caso {
     grid-column: auto;
+  }
+
+  /* Galería móvil: baja un poco la altura para que la captura se vea mejor en pantallas estrechas. */
+  .pista-galeria {
+    min-height: 520px;
   }
 
   .ruleta-proyectos {

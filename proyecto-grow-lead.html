@@ -10,13 +10,13 @@
   <body class="pagina-proyecto">
     <!-- Cabecera reutilizada: permite volver al inicio o a la sección de proyectos. -->
     <header class="cabecera-sitio esta-desplazada" data-cabecera>
-      <a class="marca" href="index.html#inicio" aria-label="Ir al inicio"><span>DavidR</span></a>
       <!-- Botón de menú móvil: aparece cuando la navegación horizontal ya no cabe. -->
       <button class="boton-menu" type="button" aria-label="Abrir menú" aria-expanded="false" data-boton-menu>
         <span class="linea-menu"></span>
         <span class="linea-menu"></span>
         <span class="linea-menu"></span>
       </button>
+      <a class="marca" href="index.html#inicio" aria-label="Ir al inicio"><span>DavidR</span></a>
       <!-- Navegación principal: en escritorio es horizontal y en móvil se convierte en panel desplegable. -->
       <nav class="navegacion" aria-label="Navegación principal" data-menu>
         <a href="index.html#perfil">Perfil</a>
@@ -42,9 +42,20 @@
             apoyo para seguimiento, motivación, actividades y participación.
           </p>
         </article>
-        <!-- Imagen principal del proyecto dentro del caso de estudio. -->
-        <figure class="imagen-caso revelar">
-          <img src="assets/imagenes/GRO&LEAD.png" alt="Imagen del proyecto Grow and Lead">
+        <!-- Galería del proyecto: permite ver capturas una por una y deslizar en móvil. -->
+        <figure class="galeria-caso revelar" data-galeria>
+          <div class="pista-galeria" data-pista-galeria>
+            <img class="slide-galeria esta-visible" src="assets/imagenes/GRO&LEAD.png" alt="Vista general del proyecto Grow and Lead">
+            <img class="slide-galeria" src="assets/imagenes/pdf-p09-1.jpg" alt="Captura del proyecto Grow and Lead">
+          </div>
+          <div class="controles-galeria">
+            <button type="button" data-galeria-anterior aria-label="Imagen anterior">Anterior</button>
+            <div class="puntos-galeria">
+              <button class="esta-activa" type="button" data-punto-galeria="0" aria-label="Ver vista general"></button>
+              <button type="button" data-punto-galeria="1" aria-label="Ver captura"></button>
+            </div>
+            <button type="button" data-galeria-siguiente aria-label="Imagen siguiente">Siguiente</button>
+          </div>
         </figure>
         <article class="bloque-caso revelar">
           <h2>Contexto del por qué del proyecto</h2>

@@ -3,6 +3,7 @@ const cabecera = document.querySelector("[data-cabecera]");
 const botonMenu = document.querySelector("[data-boton-menu]");
 const menuNavegacion = document.querySelector("[data-menu]");
 const elementosParaRevelar = document.querySelectorAll(".revelar");
+const galerias = document.querySelectorAll("[data-galeria]");
 const pistaCinta = document.querySelector(".pista-cinta");
 const ruleta = document.querySelector("[data-ruleta]");
 
@@ -45,6 +46,64 @@ if (botonMenu && menuNavegacion) {
     }
   });
 }
+
+// Galerías de proyecto: muestran capturas una por una con botones, puntos y gesto táctil.
+galerias.forEach((galeria) => {
+  const slides = [...galeria.querySelectorAll(".slide-galeria")];
+  const puntos = [...galeria.querySelectorAll("[data-punto-galeria]")];
+  const botonAnterior = galeria.querySelector("[data-galeria-anterior]");
+  const botonSiguiente = galeria.querySelector("[data-galeria-siguiente]");
+  let indiceActivo = 0;
+  let inicioToqueX = 0;
+  let inicioToqueY = 0;
+
+  // Actualiza la imagen visible y el punto activo de la galería.
+  const actualizarGaleria = (siguienteIndice) => {
+    indiceActivo = (siguienteIndice + slides.length) % slides.length;
+
+    slides.forEach((slide, indice) => {
+      slide.classList.toggle("esta-visible", indice === indiceActivo);
+    });
+
+    puntos.forEach((punto, indice) => {
+      punto.classList.toggle("esta-activa", indice === indiceActivo);
+    });
+  };
+
+  botonAnterior?.addEventListener("click", () => actualizarGaleria(indiceActivo - 1));
+  botonSiguiente?.addEventListener("click", () => actualizarGaleria(indiceActivo + 1));
+
+  puntos.forEach((punto) => {
+    punto.addEventListener("click", () => actualizarGaleria(Number(punto.dataset.puntoGaleria)));
+  });
+
+  // Swipe horizontal: cambia entre capturas en móvil.
+  galeria.addEventListener(
+    "touchstart",
+    (evento) => {
+      const toque = evento.touches[0];
+      inicioToqueX = toque.clientX;
+      inicioToqueY = toque.clientY;
+    },
+    { passive: true }
+  );
+
+  galeria.addEventListener(
+    "touchend",
+    (evento) => {
+      const toque = evento.changedTouches[0];
+      const distanciaX = toque.clientX - inicioToqueX;
+      const distanciaY = toque.clientY - inicioToqueY;
+      const umbralCambio = 40;
+
+      if (Math.abs(distanciaX) > Math.abs(distanciaY) && Math.abs(distanciaX) > umbralCambio) {
+        if (distanciaX < 0) actualizarGaleria(indiceActivo + 1);
+        if (distanciaX > 0) actualizarGaleria(indiceActivo - 1);
+      }
+    },
+    { passive: true }
+  );
+});
 
 // Muestra los elementos con animación cuando entran en pantalla.
 const observador = new IntersectionObserver(
