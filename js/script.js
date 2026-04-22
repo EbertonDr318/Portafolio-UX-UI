@@ -98,6 +98,15 @@ galerias.forEach((galeria) => {
     punto.addEventListener("click", () => actualizarGaleria(Number(punto.dataset.puntoGaleria)));
   });
 
+  // Click en imágenes: las laterales pasan al centro para replicar la lógica de la ruleta principal.
+  slides.forEach((slide, indice) => {
+    slide.addEventListener("click", () => {
+      if (indice !== indiceActivo) {
+        actualizarGaleria(indice);
+      }
+    });
+  });
+
   // Deslizamiento táctil: cambia de imagen cuando el gesto horizontal es claro.
   galeria.addEventListener(
     "touchstart",

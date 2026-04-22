@@ -861,7 +861,7 @@ h1 {
   max-height: calc(100% - 48px);
   opacity: 0;
   object-fit: contain;
-  pointer-events: none;
+  pointer-events: auto;
   filter: drop-shadow(0 20px 44px rgba(0, 0, 0, 0.42));
   transform: translate(-50%, -50%) scale(0.72);
   transition: opacity 220ms ease, transform 260ms ease, filter 260ms ease;
@@ -886,6 +886,12 @@ h1 {
   opacity: 0.28;
   z-index: 2;
   transform: translate(calc(-50% + clamp(150px, 20vw, 240px)), -50%) scale(0.84);
+}
+
+/* Slides laterales: muestran cursor de interacción para indicar que se pueden traer al centro. */
+.slide-galeria.esta-anterior,
+.slide-galeria.esta-siguiente {
+  cursor: pointer;
 }
 
 /* Variante showcase: suma aire para que la composición lateral no se sienta apretada. */
