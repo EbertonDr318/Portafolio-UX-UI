@@ -861,6 +861,20 @@ h1 {
   opacity: 1;
 }
 
+/* Variante Grow: crea un escenario oscuro para que las capturas individuales respiren y se integren mejor. */
+.galeria-caso-grow .pista-galeria {
+  background:
+    radial-gradient(circle at 50% 28%, rgba(255, 255, 255, 0.08), transparent 28%),
+    linear-gradient(180deg, #131414 0%, #070707 100%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+/* Variante Grow: añade margen interno y sombra para que el teléfono se vea como pieza central. */
+.galeria-caso-grow .slide-galeria {
+  padding: clamp(20px, 4vw, 34px);
+  filter: drop-shadow(0 20px 44px rgba(0, 0, 0, 0.42));
+}
+
 /* Controles inferiores de la galería: botones laterales y puntos de posición. */
 .controles-galeria {
   display: grid;
