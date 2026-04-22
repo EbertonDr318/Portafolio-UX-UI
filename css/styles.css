@@ -157,7 +157,7 @@ a {
 }
 
 /* Cuadro trasero: queda en la capa más baja para iniciar la profundidad visual. */
-.imagen-a {
+.imagen-b {
   z-index: 0;
   right: 9%;
   top: 10%;
@@ -165,7 +165,7 @@ a {
 }
 
 /* Laptop central: queda en medio de la composición para que sea el foco secundario. */
-.imagen-b {
+.imagen-a {
   z-index: 1;
   right: 34%;
   bottom: -13%;
