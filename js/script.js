@@ -6,6 +6,31 @@ const elementosParaRevelar = document.querySelectorAll(".revelar");
 const galerias = document.querySelectorAll("[data-galeria]");
 const pistaCinta = document.querySelector(".pista-cinta");
 const ruleta = document.querySelector("[data-ruleta]");
+const proyectoActivoActual = document.body.dataset.proyectoActivo;
+
+// Memoria de proyecto: guarda qué caso de estudio está activo para restaurarlo al volver al home.
+const guardarProyectoActivo = (indice) => {
+  try {
+    window.sessionStorage.setItem("proyectoActivoRuleta", String(indice));
+  } catch (error) {
+    console.warn("No se pudo guardar el proyecto activo en la sesión.", error);
+  }
+};
+
+// Recupera el proyecto guardado para que la ruleta no reinicie siempre en AppSheet al volver.
+const obtenerProyectoActivoGuardado = () => {
+  try {
+    return window.sessionStorage.getItem("proyectoActivoRuleta");
+  } catch (error) {
+    console.warn("No se pudo leer el proyecto activo guardado en la sesión.", error);
+    return null;
+  }
+};
+
+// En páginas de proyecto: registra el índice actual para que el home lo recuerde al regresar.
+if (proyectoActivoActual !== undefined && proyectoActivoActual !== "") {
+  guardarProyectoActivo(proyectoActivoActual);
+}
 
 // Duplica los textos de la cinta para que el movimiento horizontal se vea continuo.
 if (pistaCinta) {
@@ -152,6 +177,7 @@ if (ruleta) {
   // Calcula qué tarjeta queda al centro y qué tarjetas quedan a los lados.
   const actualizarRuleta = (siguienteIndice) => {
     indiceActivo = (siguienteIndice + tarjetas.length) % tarjetas.length;
+    guardarProyectoActivo(indiceActivo);
 
     tarjetas.forEach((tarjeta, indice) => {
       const indiceAnterior = (indiceActivo - 1 + tarjetas.length) % tarjetas.length;
@@ -218,4 +244,8 @@ if (ruleta) {
     },
     { passive: true }
   );
+
+  // Estado inicial de la ruleta: recupera el último proyecto visitado o usa el primero por defecto.
+  const indiceGuardado = Number(obtenerProyectoActivoGuardado());
+  actualizarRuleta(Number.isInteger(indiceGuardado) ? indiceGuardado : 0);
 }
