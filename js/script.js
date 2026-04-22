@@ -3,6 +3,7 @@ const cabecera = document.querySelector("[data-cabecera]");
 const botonMenu = document.querySelector("[data-boton-menu]");
 const menuNavegacion = document.querySelector("[data-menu]");
 const elementosParaRevelar = document.querySelectorAll(".revelar");
+const galerias = document.querySelectorAll("[data-galeria]");
 const pistaCinta = document.querySelector(".pista-cinta");
 const ruleta = document.querySelector("[data-ruleta]");
 
@@ -60,6 +61,67 @@ const observador = new IntersectionObserver(
 );
 
 elementosParaRevelar.forEach((elemento) => observador.observe(elemento));
+
+// Controla cada galería de proyecto: botones, puntos y gesto de deslizamiento en móvil.
+galerias.forEach((galeria) => {
+  const slides = [...galeria.querySelectorAll(".slide-galeria")];
+  const puntos = [...galeria.querySelectorAll("[data-punto-galeria]")];
+  const botonAnterior = galeria.querySelector("[data-galeria-anterior]");
+  const botonSiguiente = galeria.querySelector("[data-galeria-siguiente]");
+  let indiceActivo = 0;
+  let inicioToqueX = 0;
+  let inicioToqueY = 0;
+
+  // Activa una sola imagen a la vez y sincroniza el estado visual de los puntos.
+  const actualizarGaleria = (siguienteIndice) => {
+    indiceActivo = (siguienteIndice + slides.length) % slides.length;
+
+    slides.forEach((slide, indice) => {
+      slide.classList.toggle("esta-visible", indice === indiceActivo);
+    });
+
+    puntos.forEach((punto, indice) => {
+      punto.classList.toggle("esta-activa", indice === indiceActivo);
+    });
+  };
+
+  // Navegación principal de la galería con botones laterales.
+  botonAnterior?.addEventListener("click", () => actualizarGaleria(indiceActivo - 1));
+  botonSiguiente?.addEventListener("click", () => actualizarGaleria(indiceActivo + 1));
+
+  // Navegación directa: cada punto inferior salta a una captura concreta.
+  puntos.forEach((punto) => {
+    punto.addEventListener("click", () => actualizarGaleria(Number(punto.dataset.puntoGaleria)));
+  });
+
+  // Deslizamiento táctil: cambia de imagen cuando el gesto horizontal es claro.
+  galeria.addEventListener(
+    "touchstart",
+    (evento) => {
+      const toque = evento.touches[0];
+      inicioToqueX = toque.clientX;
+      inicioToqueY = toque.clientY;
+    },
+    { passive: true }
+  );
+
+  // Evalúa el gesto y evita cambiar de imagen cuando el movimiento fue más vertical que horizontal.
+  galeria.addEventListener(
+    "touchend",
+    (evento) => {
+      const toque = evento.changedTouches[0];
+      const distanciaX = toque.clientX - inicioToqueX;
+      const distanciaY = toque.clientY - inicioToqueY;
+      const umbralCambio = 45;
+
+      if (Math.abs(distanciaX) > Math.abs(distanciaY) && Math.abs(distanciaX) > umbralCambio) {
+        if (distanciaX < 0) actualizarGaleria(indiceActivo + 1);
+        if (distanciaX > 0) actualizarGaleria(indiceActivo - 1);
+      }
+    },
+    { passive: true }
+  );
+});
 
 // Controla la ruleta de proyectos: tarjeta activa, anterior, siguiente y puntos inferiores.
 if (ruleta) {
