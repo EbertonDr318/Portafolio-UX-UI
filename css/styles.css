@@ -838,41 +838,59 @@ h1 {
   border-top: 1px solid var(--ink);
 }
 
-/* Marco de galería: contiene la captura activa y evita que se recorte en móvil. */
+/* Marco de galería: crea un escenario oscuro para que las pantallas se lean como piezas protagonistas. */
 .pista-galeria {
   position: relative;
-  min-height: 76vh;
+  min-height: clamp(420px, 76vh, 760px);
   overflow: hidden;
   border-radius: 8px;
-  background: #eef1f2;
-}
-
-/* Slide de galería: todas las imágenes se apilan y solo una queda visible a la vez. */
-.slide-galeria {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  object-fit: contain;
-  transition: opacity 220ms ease;
-}
-
-/* Slide activo: muestra la captura actual dentro de la galería. */
-.slide-galeria.esta-visible {
-  opacity: 1;
-}
-
-/* Variante Grow: crea un escenario oscuro para que las capturas individuales respiren y se integren mejor. */
-.galeria-caso-grow .pista-galeria {
   background:
     radial-gradient(circle at 50% 28%, rgba(255, 255, 255, 0.08), transparent 28%),
     linear-gradient(180deg, #131414 0%, #070707 100%);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  touch-action: pan-y;
 }
 
-/* Variante Grow: añade margen interno y sombra para que el teléfono se vea como pieza central. */
-.galeria-caso-grow .slide-galeria {
-  padding: clamp(20px, 4vw, 34px);
+/* Slide de galería: coloca cada pantalla como tarjeta flotante y prepara la transición lateral. */
+.slide-galeria {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(320px, 68vw);
+  height: auto !important;
+  max-height: calc(100% - 48px);
+  opacity: 0;
+  object-fit: contain;
+  pointer-events: none;
   filter: drop-shadow(0 20px 44px rgba(0, 0, 0, 0.42));
+  transform: translate(-50%, -50%) scale(0.72);
+  transition: opacity 220ms ease, transform 260ms ease, filter 260ms ease;
+}
+
+/* Slide activo: queda al centro, nítido y con tamaño completo. */
+.slide-galeria.esta-visible {
+  opacity: 1;
+  z-index: 3;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Slide anterior: queda visible a la izquierda con menor fuerza visual. */
+.slide-galeria.esta-anterior {
+  opacity: 0.28;
+  z-index: 2;
+  transform: translate(calc(-50% - clamp(150px, 20vw, 240px)), -50%) scale(0.84);
+}
+
+/* Slide siguiente: queda visible a la derecha con menor fuerza visual. */
+.slide-galeria.esta-siguiente {
+  opacity: 0.28;
+  z-index: 2;
+  transform: translate(calc(-50% + clamp(150px, 20vw, 240px)), -50%) scale(0.84);
+}
+
+/* Variante showcase: suma aire para que la composición lateral no se sienta apretada. */
+.galeria-caso-showcase .slide-galeria {
+  padding: clamp(20px, 4vw, 34px);
 }
 
 /* Controles inferiores de la galería: botones laterales y puntos de posición. */

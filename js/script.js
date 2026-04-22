@@ -77,7 +77,11 @@ galerias.forEach((galeria) => {
     indiceActivo = (siguienteIndice + slides.length) % slides.length;
 
     slides.forEach((slide, indice) => {
+      const indiceAnterior = (indiceActivo - 1 + slides.length) % slides.length;
+      const indiceSiguiente = (indiceActivo + 1) % slides.length;
       slide.classList.toggle("esta-visible", indice === indiceActivo);
+      slide.classList.toggle("esta-anterior", indice === indiceAnterior);
+      slide.classList.toggle("esta-siguiente", indice === indiceSiguiente);
     });
 
     puntos.forEach((punto, indice) => {
@@ -121,6 +125,9 @@ galerias.forEach((galeria) => {
     },
     { passive: true }
   );
+
+  // Estado inicial: al cargar la página deja una captura central y dos laterales con menor opacidad.
+  actualizarGaleria(0);
 });
 
 // Controla la ruleta de proyectos: tarjeta activa, anterior, siguiente y puntos inferiores.
